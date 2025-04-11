@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZenZone - Your Wellness Companion</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-spa"></i>
+                ZenZone
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="login.html" class="login-btn">Login</a>
+                <a href="login.html" class="signup-btn">Sign Up</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Find Your Zen</h1>
+                <p>Connect with AI wellness experts and discover your path to mental well-being.</p>
+                <div class="hero-buttons">
+                    <button class="cta-button" id="start-chat-btn">Start Chat</button>
+                    <button class="voice-call-btn" id="voice-call-btn">
+                        <i class="fas fa-microphone"></i>
+                        Voice Call
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="services">
+            <h2>Our Services</h2>
+            <div class="service-cards">
+                <div class="card">
+                    <i class="fas fa-robot"></i>
+                    <h3>AI Wellness Expert</h3>
+                    <p>Get instant guidance from our AI wellness assistant</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-comments"></i>
+                    <h3>Live Chat Support</h3>
+                    <p>Connect with real wellness professionals</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-microphone"></i>
+                    <h3>Voice Assistant</h3>
+                    <p>Hands-free wellness support with Google Assistant</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Common Health Issues Section -->
+        <section class="health-issues">
+            <h2>Common Health Issues</h2>
+            <div class="health-issues-container">
+                <button class="health-issue-btn" data-issue="stress">
+                    <div class="content">
+                        <i class="fas fa-brain"></i>
+                        <span>Stress</span>
+                    </div>
+                </button>
+                <button class="health-issue-btn" data-issue="anxiety">
+                    <div class="content">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Anxiety</span>
+                    </div>
+                </button>
+                <button class="health-issue-btn" data-issue="sleep">
+                    <div class="content">
+                        <i class="fas fa-moon"></i>
+                        <span>Sleep Issues</span>
+                    </div>
+                </button>
+                <button class="health-issue-btn" data-issue="depression">
+                    <div class="content">
+                        <i class="fas fa-cloud"></i>
+                        <span>Depression</span>
+                    </div>
+                </button>
+                <button class="health-issue-btn" data-issue="focus">
+                    <div class="content">
+                        <i class="fas fa-bullseye"></i>
+                        <span>Focus Issues</span>
+                    </div>
+                </button>
+            </div>
+            <div class="health-solution">
+                <div class="solution-content">
+                    <h3>Select a health issue to see solutions</h3>
+                    <p>Click on any of the health issues above to get personalized wellness solutions and guidance.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="chat-section" class="chat-section">
+            <div class="chat-container">
+                <div class="chat-header">
+                    <h3>ZenZone Chat</h3>
+                    <div class="chat-options">
+                        <button class="ai-expert-btn">AI Expert</button>
+                        <button class="live-chat-btn">Live Support</button>
+                        <button class="voice-call-btn" id="chat-voice-btn">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="chat-messages" id="chat-messages">
+                    <!-- Messages will be added here dynamically -->
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="message-input" placeholder="Type your message...">
+                    <button id="send-button"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Voice Call Modal -->
+        <div class="modal" id="voice-call-modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3>Voice Call with Google Assistant</h3>
+                <div class="voice-call-status">
+                    <div class="voice-wave" id="voice-wave">
+                        <div class="wave"></div>
+                        <div class="wave"></div>
+                        <div class="wave"></div>
+                    </div>
+                    <p id="voice-status">Ready to connect...</p>
+                </div>
+                <div class="voice-controls">
+                    <button id="start-voice-call" class="voice-btn">
+                        <i class="fas fa-microphone"></i>
+                        Start Voice Call
+                    </button>
+                    <button id="end-voice-call" class="voice-btn" disabled>
+                        <i class="fas fa-phone-slash"></i>
+                        End Call
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>Email: support@zenzone.com</p>
+                <p>Phone: +1 (555) 123-4567</p>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 ZenZone. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

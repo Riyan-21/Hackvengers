@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZenZone - Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ZenZone Branding Colors */
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #81C784;
+            --accent-color: #FFB74D;
+            --text-color: #2C3E50;
+            --background-color: #F5F5F5;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Animation Keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Container Styles */
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* Logo Styles */
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo i {
+            color: var(--accent-color);
+        }
+
+        /* Form Styles */
+        .form-container {
+            display: none;
+        }
+
+        .form-container.active {
+            display: block;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.2);
+        }
+
+        /* Button Styles */
+        .btn {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Toggle Styles */
+        .toggle-container {
+            display: flex;
+            margin-bottom: 2rem;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .toggle-btn {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            background-color: white;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Error Message Styles */
+        .error-message {
+            color: #E57373;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        /* Social Login Styles */
+        .social-login {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .social-login p {
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: white;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .social-icons .fa-google {
+            color: #DB4437;
+        }
+
+        .social-icons .fa-facebook {
+            color: #4267B2;
+        }
+
+        .social-icons .fa-apple {
+            color: #000000;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <i class="fas fa-spa"></i>
+            ZenZone
+        </div>
+
+        <div class="toggle-container">
+            <div class="toggle-btn active" onclick="toggleForm('login')">Login</div>
+            <div class="toggle-btn" onclick="toggleForm('signup')">Sign Up</div>
+        </div>
+
+        <!-- Login Form -->
+        <div id="login-form" class="form-container active">
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required>
+                    <div class="error-message" id="login-email-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                    <div class="error-message" id="login-password-error"></div>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+
+        <!-- Signup Form -->
+        <div id="signup-form" class="form-container">
+            <form onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <label for="signup-name">Full Name</label>
+                    <input type="text" id="signup-name" required>
+                    <div class="error-message" id="signup-name-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" required>
+                    <div class="error-message" id="signup-email-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" required>
+                    <div class="error-message" id="signup-password-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="signup-confirm-password">Confirm Password</label>
+                    <input type="password" id="signup-confirm-password" required>
+                    <div class="error-message" id="signup-confirm-password-error"></div>
+                </div>
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+            </form>
+        </div>
+
+        <div class="social-login">
+            <p>Or continue with</p>
+            <div class="social-icons">
+                <a href="#" title="Login with Google"><i class="fab fa-google"></i></a>
+                <a href="#" title="Login with Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" title="Login with Apple"><i class="fab fa-apple"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check URL parameters and set initial form
+        window.addEventListener('load', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const mode = urlParams.get('mode');
+            
+            if (mode === 'signup') {
+                toggleForm('signup');
+            }
+        });
+
+        // Form Toggle Function
+        function toggleForm(formType) {
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+            const loginBtn = document.querySelector('.toggle-btn:first-child');
+            const signupBtn = document.querySelector('.toggle-btn:last-child');
+
+            if (formType === 'login') {
+                loginForm.classList.add('active');
+                signupForm.classList.remove('active');
+                loginBtn.classList.add('active');
+                signupBtn.classList.remove('active');
+            } else {
+                loginForm.classList.remove('active');
+                signupForm.classList.add('active');
+                loginBtn.classList.remove('active');
+                signupBtn.classList.add('active');
+            }
+        }
+
+        // Form Validation Functions
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function validatePassword(password) {
+            return password.length >= 8;
+        }
+
+        // Error Message Display
+        function showError(elementId, message) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+
+        function hideError(elementId) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.style.display = 'none';
+        }
+
+        // Form Handlers
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            // Reset error messages
+            hideError('login-email-error');
+            hideError('login-password-error');
+            
+            // Validate email
+            if (!validateEmail(email)) {
+                showError('login-email-error', 'Please enter a valid email address');
+                return;
+            }
+            
+            // Validate password
+            if (!validatePassword(password)) {
+                showError('login-password-error', 'Password must be at least 8 characters long');
+                return;
+            }
+            
+            // In a real application, you would send this data to your backend
+            console.log('Login attempt:', { email, password });
+            
+            // Simulate successful login
+            alert('Login successful! Redirecting to dashboard...');
+            // window.location.href = 'dashboard.html';
+        }
+
+        function handleSignup(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('signup-confirm-password').value;
+            
+            // Reset error messages
+            hideError('signup-name-error');
+            hideError('signup-email-error');
+            hideError('signup-password-error');
+            hideError('signup-confirm-password-error');
+            
+            // Validate name
+            if (name.length < 2) {
+                showError('signup-name-error', 'Name must be at least 2 characters long');
+                return;
+            }
+            
+            // Validate email
+            if (!validateEmail(email)) {
+                showError('signup-email-error', 'Please enter a valid email address');
+                return;
+            }
+            
+            // Validate password
+            if (!validatePassword(password)) {
+                showError('signup-password-error', 'Password must be at least 8 characters long');
+                return;
+            }
+            
+            // Validate password confirmation
+            if (password !== confirmPassword) {
+                showError('signup-confirm-password-error', 'Passwords do not match');
+                return;
+            }
+            
+            // In a real application, you would send this data to your backend
+            console.log('Signup attempt:', { name, email, password });
+            
+            // Simulate successful signup
+            alert('Account created successfully! Please log in.');
+            toggleForm('login');
+        }
+
+        // Social Login Handlers
+        document.querySelectorAll('.social-icons a').forEach(icon => {
+            icon.addEventListener('click', (e) => {
+                e.preventDefault();
+                const provider = icon.querySelector('i').classList[1].split('-')[1];
+                alert(`Login with ${provider} clicked`);
+                // Implement actual social login here
+            });
+        });
+    </script>
+</body>
+</html> 

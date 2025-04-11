@@ -1,0 +1,712 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ZenZone Branding Colors */
+:root {
+    --primary-color: #4CAF50;
+    --secondary-color: #81C784;
+    --accent-color: #FFB74D;
+    --text-color: #2C3E50;
+    --background-color: #F5F5F5;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes wave {
+    0%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(2); }
+}
+
+/* Logo Styling */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.logo i {
+    color: var(--accent-color);
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Header and Navigation */
+header {
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    animation: fadeIn 0.5s ease-out;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color 0.3s;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.login-btn, .signup-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.login-btn {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.signup-btn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.login-btn:hover, .signup-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.login-btn:active, .signup-btn:active {
+    transform: translateY(1px);
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 0 1rem;
+    animation: fadeIn 1s ease-out;
+}
+
+.hero-content {
+    max-width: 800px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: fadeIn 1s ease-out 0.3s backwards;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    animation: fadeIn 1s ease-out 0.6s backwards;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.cta-button {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    animation: fadeIn 1s ease-out 0.9s backwards, pulse 2s infinite 2s;
+}
+
+.voice-call-btn {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cta-button:hover, .voice-call-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Voice Call Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2000;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+    position: relative;
+    background-color: white;
+    margin: 15% auto;
+    padding: 2rem;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.close-modal {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-color);
+    transition: color 0.3s;
+}
+
+.close-modal:hover {
+    color: var(--primary-color);
+}
+
+.voice-call-status {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.voice-wave {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.wave {
+    width: 4px;
+    height: 20px;
+    background-color: var(--primary-color);
+    border-radius: 2px;
+    animation: wave 1s ease-in-out infinite;
+}
+
+.wave:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.wave:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.voice-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.voice-btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#start-voice-call {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+#end-voice-call {
+    background-color: #E57373;
+    color: white;
+}
+
+.voice-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.voice-btn:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+/* Services Section */
+.services {
+    padding: 5rem 1rem;
+    background-color: var(--background-color);
+}
+
+.services h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--text-color);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.service-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    animation: fadeIn 0.5s ease-out;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.card i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Chat Section */
+.chat-section {
+    padding: 5rem 1rem;
+    background-color: white;
+}
+
+.chat-container {
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.chat-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-options {
+    display: flex;
+    gap: 1rem;
+}
+
+.chat-options button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: white;
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.chat-options .voice-call-btn {
+    padding: 0.5rem;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chat-options button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.chat-messages {
+    height: 400px;
+    overflow-y: auto;
+    padding: 1rem;
+    background-color: var(--background-color);
+}
+
+.message {
+    animation: slideIn 0.3s ease-out;
+    margin: 10px 0;
+    padding: 10px 15px;
+    border-radius: 15px;
+    max-width: 80%;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.user-message {
+    background-color: var(--primary-color);
+    color: white;
+    margin-left: auto;
+    animation: slideIn 0.3s ease-out;
+}
+
+.ai-message {
+    background-color: #f1f1f1;
+    color: var(--text-color);
+    margin-right: auto;
+    animation: slideIn 0.3s ease-out;
+}
+
+.chat-input {
+    display: flex;
+    padding: 1rem;
+    background-color: white;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-right: 1rem;
+    transition: all 0.3s ease;
+}
+
+.chat-input input:focus {
+    transform: scale(1.02);
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.2);
+}
+
+#send-button {
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#send-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Footer */
+footer {
+    background-color: var(--text-color);
+    color: white;
+    padding: 3rem 1rem 1rem;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.footer-section h4 {
+    margin-bottom: 1rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-links a {
+    color: white;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    transform: translateY(-5px) rotate(10deg);
+    color: var(--accent-color);
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Loading Animation */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .voice-controls {
+        flex-direction: column;
+    }
+
+    .chat-container {
+        margin: 0 1rem;
+    }
+
+    .modal-content {
+        width: 90%;
+        margin: 30% auto;
+    }
+}
+
+/* Health Issues Section */
+.health-issues {
+    padding: 5rem 1rem;
+    background-color: var(--background-color);
+    text-align: center;
+}
+
+.health-issues h2 {
+    margin-bottom: 2rem;
+    color: var(--text-color);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.health-issues-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+}
+
+.health-issue-btn {
+    padding: 0;
+    background: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    color: var(--text-color);
+    overflow: hidden;
+    position: relative;
+}
+
+.health-issue-btn img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+    transition: transform 0.3s ease;
+}
+
+.health-issue-btn .content {
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+    background: white;
+    position: relative;
+    z-index: 1;
+}
+
+.health-issue-btn i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.health-issue-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.health-issue-btn:hover img {
+    transform: scale(1.05);
+}
+
+.health-issue-btn:hover i {
+    color: var(--primary-color);
+}
+
+.health-issue-btn:hover .content {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.health-issue-btn:hover .content i {
+    color: white;
+}
+
+/* Responsive Design for Health Issues */
+@media (max-width: 768px) {
+    .health-issues-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .health-issue-btn img {
+        height: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .health-issues-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .health-issue-btn img {
+        height: 150px;
+    }
+}
+
+.health-solution {
+    background: white;
+    border-radius: 10px;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.solution-content {
+    text-align: left;
+}
+
+.solution-content h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.solution-content p {
+    color: var(--text-color);
+    line-height: 1.6;
+} 
